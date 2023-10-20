@@ -20,6 +20,9 @@
     "url": "https://github.com/kenji-twp/vite-plugin-copy-anytime/issues"
   },
   "homepage": "https://github.com/kenji-twp/vite-plugin-copy-anytime#readme",
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
   "devDependencies": {
     "eslint": "^8.51.0",
     "prettier": "^3.0.3"
