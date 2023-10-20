@@ -1,0 +1,33 @@
+{
+  "name": "vite-plugin-copy-anytime",
+  "version": "0.0.0",
+  "description": "Vite Plugin to copy files on serve and build",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenji-twp/vite-plugin-copy-anytime.git"
+  },
+  "keywords": [
+    "Vite plugin",
+    "Vite plugin copy",
+    "Vite plugin hmr copy"
+  ],
+  "author": "Kenji Shimizu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kenji-twp/vite-plugin-copy-anytime/issues"
+  },
+  "homepage": "https://github.com/kenji-twp/vite-plugin-copy-anytime#readme",
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "prettier": "^3.0.3"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "fast-glob": "^3.3.1",
+    "fs-extra": "^11.1.1",
+    "micromatch": "^4.0.5"
+  }
+}
