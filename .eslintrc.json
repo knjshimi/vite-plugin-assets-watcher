@@ -1,24 +1,9 @@
 {
   "root": true,
   "parserOptions": {
-    "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "env": {
-    "browser": true,
-    "es6": true
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js"]
-      }
-    }
-  },
-  "extends": [
-    "plugin:prettier/recommended",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly",
@@ -26,12 +11,21 @@
     "ga": "readonly"
   },
   "rules": {
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never"
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+  },
+  "overrides": [
+    {
+      "files": ["*.{js,cjs}"],
+      "excludedFiles": ["*/**/*.{js,cjs}"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
       }
-    ]
-  }
+    }
+  ],
+  "reportUnusedDisableDirectives": true
 }
