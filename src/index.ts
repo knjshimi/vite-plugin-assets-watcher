@@ -23,10 +23,10 @@ type Target = {
 
 type PluginConfig = {
   targets: Target[];
-  quiet: boolean;
+  silent?: boolean;
 };
 
-const viteAssetsWatcher = (config: PluginConfig = { targets: [], quiet: true }): Plugin => {
+const viteAssetsWatcher = (config: PluginConfig = { targets: [], silent: true }): Plugin => {
   let viteConfig: ResolvedConfig;
   const subscriptions = new Set<AsyncSubscription>();
   const targets: Target[] = config.targets;
@@ -45,7 +45,7 @@ const viteAssetsWatcher = (config: PluginConfig = { targets: [], quiet: true }):
       const dest = normalize(resolve(target.dest, basename(rename(file))));
 
       viteConfig.logger.info(
-        `${chalk.green('[copyAnytime] ' + relative(currentDir, dest))}${chalk.dim(' from ')}${chalk.blue(
+        `${chalk.green('[assetsWatcher] ' + relative(currentDir, dest))}${chalk.dim(' from ')}${chalk.blue(
           relative(currentDir, src.replace(basename(file), '')),
         )}`,
       );
@@ -79,7 +79,7 @@ const viteAssetsWatcher = (config: PluginConfig = { targets: [], quiet: true }):
 
           const subscription = await watcher.subscribe(normalize(resolve(dirname(target.src))), async (err, events) => {
             if (err) {
-              viteConfig.logger.error(chalk.red('[copyAnytime] Parcel watcher error'));
+              viteConfig.logger.error(chalk.red('[assetsWatcher] Parcel watcher error'));
               throw err;
             }
 
@@ -88,21 +88,31 @@ const viteAssetsWatcher = (config: PluginConfig = { targets: [], quiet: true }):
 
               const matches = micromatch.isMatch(event.path, normalize(resolve(target.src)));
               if (!matches) {
-                viteConfig.logger.info(
-                  chalk.yellow('[copyAnytime] ' + event.type + ': ' + relative(currentDir, dest) + ' (ignored)'),
-                );
+                if (!config.silent) {
+                  viteConfig.logger.info(
+                    chalk.yellow('[assetsWatcher] ' + event.type + ': ' + relative(currentDir, dest) + ' (ignored)'),
+                  );
+                }
                 continue;
               }
 
               if (event.type === 'delete') {
                 rmSync(dest);
-                viteConfig.logger.info(chalk.dim('[copyAnytime] ' + event.type + 'd: ' + relative(currentDir, dest)));
+                if (!config.silent) {
+                  viteConfig.logger.info(
+                    chalk.dim('[assetsWatcher] ' + event.type + 'd: ' + relative(currentDir, dest)),
+                  );
+                }
                 continue;
               }
 
               if (event.type === 'create' || event.type === 'update') {
                 copyFileSync(event.path, dest);
-                viteConfig.logger.info(chalk.green('[copyAnytime] ' + event.type + 'd: ' + relative(currentDir, dest)));
+                if (!config.silent) {
+                  viteConfig.logger.info(
+                    chalk.green('[assetsWatcher] ' + event.type + 'd: ' + relative(currentDir, dest)),
+                  );
+                }
                 continue;
               }
             }
@@ -128,7 +138,7 @@ const viteAssetsWatcher = (config: PluginConfig = { targets: [], quiet: true }):
         subscriptions.delete(subscription);
       }
 
-      viteConfig.logger.info(chalk.green('[copyAnytime] ') + chalk.dim('Closed Parcel watchers'));
+      viteConfig.logger.info(chalk.green('[assetsWatcher] ') + chalk.dim('Closed Parcel watchers'));
     },
   };
 };
