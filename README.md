@@ -1,1 +1,1 @@
-# Copy Anytime
+# Vite Plugin Assets Watcher
