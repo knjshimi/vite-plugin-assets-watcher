@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-assets-watcher",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Vite plugin to watch static assets",
   "type": "module",
   "main": "./dist/index.js",
