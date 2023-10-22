@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kenji-twp/vite-plugin-copy-anytime.git"
+    "url": "git+https://github.com/kenji-twp/vite-plugin-assets-watcher.git"
   },
   "keywords": [
     "vite plugin",
@@ -33,9 +33,9 @@
   "author": "Kenji Shimizu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kenji-twp/vite-plugin-copy-anytime/issues"
+    "url": "https://github.com/kenji-twp/vite-plugin-assets-watcher/issues"
   },
-  "homepage": "https://github.com/kenji-twp/vite-plugin-copy-anytime#readme",
+  "homepage": "https://github.com/kenji-twp/vite-plugin-assets-watcher#readme",
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
   },
